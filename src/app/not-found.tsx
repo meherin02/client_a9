@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function NotFound() { return <main className="route-state"><p className="eyebrow">404 · OFF THE BEATEN PATH</p><h1>This page isn’t in our toolkit.</h1><p>The link may have changed. Find your way back to equipment for your next project.</p><div className="workspace-links"><Link className="button dark" href="/equipment">Explore equipment</Link><Link className="button" href="/">Back to home</Link></div></main>; }

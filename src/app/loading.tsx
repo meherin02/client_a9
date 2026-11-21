@@ -1,0 +1,1 @@
+export default function Loading() { return <main className="route-state" role="status" aria-live="polite"><span className="loading loading-spinner loading-lg" aria-hidden="true"/><p className="eyebrow">GEARHARBOR</p><h1>Getting things ready.</h1><p>Your next possibility is just a moment away.</p></main>; }

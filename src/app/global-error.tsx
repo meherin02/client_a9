@@ -1,0 +1,2 @@
+'use client';
+export default function GlobalError({ retry }: { error: unknown; retry: () => void }) { return <html lang="en"><body style={{ fontFamily: 'Arial, sans-serif', padding: '10vh 8%', color: '#142c2a', background: '#fafbf8' }}><h1>Something went wrong.</h1><p>Please try again to reopen GearHarbor.</p><button style={{ padding: '12px 20px', cursor: 'pointer' }} onClick={() => retry()}>Try again</button></body></html>; }
