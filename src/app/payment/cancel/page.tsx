@@ -1,0 +1,3 @@
+import Link from 'next/link';
+import { SiteHeader } from '@/components/site-header';
+export default function PaymentCancelled() { return <><SiteHeader/><main className="workspace"><div className="payment-result"><p className="eyebrow">TAKE YOUR TIME</p><h1>Checkout wasn’t completed.</h1><p>No paid booking has been confirmed on this page. A temporary reservation may remain until the Checkout Session expires, usually within 30 minutes.</p><Link className="button dark" href="/equipment">Back to equipment</Link><p><Link href="/dashboard/customer/rentals">Check my rentals</Link></p></div></main></>; }
