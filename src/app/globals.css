@@ -826,6 +826,19 @@ td small { display: block; font-size: 12px; color: var(--muted); margin-top: 5px
   transition: color var(--transition-fast);
 }
 .table-actions button:hover, .table-actions a:hover { color: var(--ink); }
+.rental-cards-mobile { display: none; }
+.rental-mobile-card { display: grid; gap: 16px; padding: 18px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface-card); box-shadow: var(--shadow-sm); }
+.rental-mobile-card-heading { display: flex; justify-content: space-between; align-items: start; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-soft); }
+.rental-mobile-card-heading .eyebrow { margin-bottom: 5px; color: var(--ink); font-size: 13px; letter-spacing: .2px; }
+.rental-mobile-card-heading > div > span { color: var(--muted); font-size: 12px; }
+.rental-mobile-person { display: flex; justify-content: space-between; align-items: start; gap: 12px; font-size: 12px; }
+.rental-mobile-person > span, .rental-mobile-facts > div > span { color: var(--muted); }
+.rental-mobile-person > div { display: grid; text-align: right; overflow-wrap: anywhere; }
+.rental-mobile-person > div > span { color: var(--muted); font-size: 11px; }
+.rental-mobile-facts { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; padding: 12px; border-radius: var(--radius-sm); background: var(--green-pale); }
+.rental-mobile-facts > div { display: grid; gap: 4px; overflow-wrap: anywhere; }
+.rental-mobile-facts > div > span { font-size: 10px; }
+.rental-mobile-facts > div > strong { font-size: 12px; }
 .table-actions .danger { color: #a23636; }
 .table-actions .danger:hover { color: #7a1a1a; }
 
@@ -863,6 +876,8 @@ td small { display: block; font-size: 12px; color: var(--muted); margin-top: 5px
   .catalog-layout { gap: 20px; grid-template-columns: 210px minmax(0,1fr); }
 }
 @media(max-width:760px) {
+  .rental-cards-mobile { display: grid; gap: 14px; }
+  .rental-table-desktop { display: none; }
   .catalog-layout { grid-template-columns: 1fr; }
   .filter-panel { position: static; }
   .filter-panel form { grid-template-columns: 1fr 1fr; gap: 15px; }
