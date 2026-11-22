@@ -6,6 +6,7 @@ import { SiteFooter } from '@/components/site-footer';
 
 export const metadata: Metadata = {
   title: "GearHarbor | Equipment. Possibilities.",
+  icons: { icon: '/icon.svg', shortcut: '/icon.svg' },
   description: "Find equipment for your next project. Explore local daily, weekly, and monthly rentals with GearHarbor.",
 };
 

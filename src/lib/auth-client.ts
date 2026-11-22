@@ -1,7 +1,7 @@
 import { createAuthClient } from 'better-auth/react';
 import { jwtClient } from 'better-auth/client/plugins';
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || (typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000');
 export const authClient = createAuthClient({ baseURL: API_URL, plugins: [jwtClient()] });
 export function safeReturnPath(value: string | null) {
   return value?.startsWith('/') && !value.startsWith('//') && !value.includes('\\') ? value : '/dashboard';
