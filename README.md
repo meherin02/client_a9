@@ -1,6 +1,6 @@
 # GearHarbor
 
-GearHarbor is an equipment rental marketplace built for Assignment 9 Category 003. Customers discover equipment, save favorites, and pay for date-based rentals. Owners manage listings and rentals; admins moderate equipment and manage users.
+GearHarbor is an equipment rental marketplace where customers discover equipment, save favorites, and pay for date-based rentals. Owners manage listings and rentals; admins moderate equipment and manage users.
 
 ## Live URL
 
