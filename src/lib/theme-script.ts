@@ -1,0 +1,1 @@
+export const themeInitScript = `(function(){var t;try{t=localStorage.getItem('gearharbor-theme')}catch{}document.documentElement.dataset.theme=t==='light'||t==='dark'?t:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'})()`;

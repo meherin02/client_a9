@@ -3,6 +3,8 @@ import "./globals.css";
 import { Toaster } from 'sonner';
 import { SiteFooter } from '@/components/site-footer';
 import { Inter } from 'next/font/google';
+import { ThemeSync } from '@/components/theme-toggle';
+import { themeInitScript } from '@/lib/theme-script';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -21,9 +23,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`h-full antialiased ${inter.variable}`}
     >
-      <body className="min-h-full flex flex-col">{children}<SiteFooter/><Toaster richColors position="top-right" /></body>
+      <head><script dangerouslySetInnerHTML={{ __html: themeInitScript }}/></head>
+      <body className="min-h-full flex flex-col"><ThemeSync/>{children}<SiteFooter/><Toaster richColors position="top-right" /></body>
     </html>
   );
 }
