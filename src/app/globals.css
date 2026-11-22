@@ -359,9 +359,10 @@ main { max-width: 1440px; margin: auto; width: 100%; }
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CATEGORIES
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-.categories { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.categories { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
 .categories a {
-  padding: 26px 18px;
+  min-height: 150px;
+  padding: 22px;
   border: 1.5px solid var(--border);
   border-radius: var(--radius-md);
   display: flex;
@@ -370,12 +371,19 @@ main { max-width: 1440px; margin: auto; width: 100%; }
   background: var(--surface-card);
   transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
   box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
 }
 .categories a:hover {
   transform: translateY(-6px);
   border-color: var(--green-light);
   box-shadow: var(--shadow-lg);
 }
+.categories a:focus-visible { outline: 3px solid var(--green-mid); outline-offset: 3px; }
+.category-icon { display: block; width: 26px; height: 26px; margin-bottom: 5px; color: var(--green-mid); transition: transform var(--transition-fast); }
+.categories a:hover .category-icon { transform: scale(1.1); }
+.categories a > span:last-child { margin-top: auto; color: var(--muted); font-size: 12px; }
+.categories a > strong { font-size: 14px; }
 .category-icon {
   font-size: 28px;
   color: var(--green-light);
@@ -1162,7 +1170,7 @@ td small { display: block; font-size: 12px; color: var(--muted); margin-top: 5px
   nav { display: none; }
   .rental-hero-copy { padding: 48px 7%; }
   .rental-hero-photo { min-height: 500px; }
-  .categories { grid-template-columns: repeat(3, 1fr); }
+  .categories { grid-template-columns: repeat(3, minmax(0,1fr)); }
   .benefits { grid-template-columns: 1fr 1fr; }
   .search div { flex-direction: column; }
   .search input { padding: 10px 0; }
@@ -1179,7 +1187,8 @@ td small { display: block; font-size: 12px; color: var(--muted); margin-top: 5px
   .category-section, .how { padding: 48px 6%; }
   .section-top { align-items: start; flex-direction: column; }
   h2 { font-size: 27px; }
-  .categories { grid-template-columns: repeat(2, 1fr); }
+  .categories { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+  .categories a { min-height: 136px; padding: 16px; }
   .benefits { padding: 32px; grid-template-columns: 1fr; gap: 20px; }
   .steps { grid-template-columns: 1fr; gap: 24px; }
   footer { flex-direction: column; align-items: start; }
