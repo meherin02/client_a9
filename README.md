@@ -4,7 +4,7 @@ GearHarbor is an equipment rental marketplace built for Assignment 9 Category 00
 
 ## Live URL
 
-Not deployed yet. Add the verified production URL before submission.
+[Live site](https://gearharbor-client.vercel.app/) | [API health](https://server-a9.onrender.com/api/health)
 
 ## Local setup
 
@@ -34,7 +34,7 @@ Start and end dates are both billable. Daily rentals count calendar days; weekly
 
 Production build and configured lint/type checks are required before submission. End-to-end authentication, MongoDB concurrency, imgbb uploads, Stripe payments, responsive browser checks and deployed route refreshes still need verification with configured services. Verified Google email addresses remain read-only; unverified email addresses use Better Auth's change-email flow. Reviews are labeled illustrative and must be replaced with authorized genuine reviews if presented as real testimonials.
 
-Separate repositories are required. Replace this section with client/server repository URLs before submission. The brief requires at least 20 meaningful client commits and 12 server commits. Do not fabricate or split unrelated changes simply to inflate history.
+Client and server repository links are provided below. The brief requires at least 20 meaningful client commits and 12 server commits. Do not fabricate or split unrelated changes simply to inflate history.
 
 ## Deployment
 
@@ -43,3 +43,4 @@ Follow [DEPLOYMENT.md](DEPLOYMENT.md) for the same-origin API proxy configuratio
 Client repository: https://github.com/meherin02/client_a9
 
 Server repository: https://github.com/meherin02/server_a9
+
