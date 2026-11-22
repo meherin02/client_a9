@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { AccountNav } from './account-nav';
 import { ThemeToggle } from './theme-toggle';
+import { HeaderNavigation } from './header-navigation';
 export function SiteHeader() {
   return (
     <header className="site-header">
@@ -8,19 +9,13 @@ export function SiteHeader() {
         gear<span>harbor</span>
         <small>EQUIPMENT. POSSIBILITIES.</small>
       </Link>
-      <nav>
-        <Link href="/">Home</Link>
-        <Link href="/equipment">All equipment</Link>
-        <Link href="/#how-it-works">How it works</Link>
-      </nav>
+      <HeaderNavigation />
       <div className="header-actions"><ThemeToggle/><AccountNav/></div>
       <details className="mobile-navigation">
         <summary>☰ Menu</summary>
         <div>
-          <Link href="/">Home</Link>
-          <Link href="/equipment">All equipment</Link>
-          <Link href="/#how-it-works">How it works</Link>
-          <Link href="/dashboard">Dashboard</Link>
+          <HeaderNavigation />
+          <AccountNav />
         </div>
       </details>
     </header>
