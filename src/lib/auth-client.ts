@@ -13,7 +13,7 @@ export async function authenticatedFetch(path: string, options: RequestInit = {}
   headers.set('Authorization', `Bearer ${data.token}`);
   if (typeof options.body === 'string') headers.set('Content-Type', 'application/json');
   const response = await fetch(`${API_URL}${path}`, { ...options, headers, credentials: 'include', cache: 'no-store' });
-  const body = await response.json();
+  const body = response.status === 204 ? null : await response.json();
   if (!response.ok) throw new Error(body.message || 'Unable to load your account.');
   return body;
 }

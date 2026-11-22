@@ -915,6 +915,13 @@ td small { display: block; font-size: 12px; color: var(--muted); margin-top: 5px
 .booking-summary p { margin: 0 0 10px; }
 .booking-summary strong { display: block; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
 .booking-summary small { display: block; margin-top: 10px; color: var(--muted); }
+.booking-summary .availability-positive, .booking-summary .availability-negative { margin: 12px 0 4px; font-weight: 650; }
+.booking-summary .availability-positive { color: var(--green-mid); }
+.booking-summary .availability-negative { color: #b53e4d; }
+.availability-days { margin: 10px 0; border-top: 1px solid var(--border); padding-top: 10px; }
+.availability-days summary { cursor: pointer; color: var(--green-mid); font-size: 13px; font-weight: 600; }
+.availability-days ul { display: grid; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+.availability-days li { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 12px; }
 .payment-result {
   max-width: 700px;
   margin: 70px auto;
