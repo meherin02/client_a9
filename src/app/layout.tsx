@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from 'sonner';
 import { SiteFooter } from '@/components/site-footer';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 
 export const metadata: Metadata = {
@@ -14,7 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className="h-full antialiased"
+      className={`h-full antialiased ${inter.variable}`}
     >
       <body className="min-h-full flex flex-col">{children}<SiteFooter/><Toaster richColors position="top-right" /></body>
     </html>
