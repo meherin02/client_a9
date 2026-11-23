@@ -1252,3 +1252,24 @@ td small { display: block; font-size: 12px; color: var(--muted); margin-top: 5px
     animation-iteration-count: 1 !important;
   }
 }
+
+.vendor-landing { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(300px, .6fr); gap: 28px; width: min(1200px, 92%); margin: 60px auto 100px; }
+.vendor-landing-copy, .vendor-landing-aside { border-radius: var(--radius-md); padding: clamp(30px, 5vw, 70px); }
+.vendor-landing-copy { background: var(--surface-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.vendor-landing h1 { max-width: 670px; font-size: clamp(48px, 6vw, 84px); line-height: 1.05; letter-spacing: -.055em; margin: 18px 0 25px; }
+.vendor-landing-copy > p:not(.eyebrow) { color: var(--ink-soft); max-width: 630px; line-height: 1.8; }
+.vendor-steps { display: flex; gap: 12px; flex-wrap: wrap; margin: 36px 0; }
+.vendor-steps span { display: flex; align-items: center; gap: 9px; background: var(--green-pale); color: var(--ink); border-radius: 10px; padding: 12px 15px; font-size: 13px; font-weight: 650; }
+.vendor-steps strong { color: var(--green-mid); }
+.vendor-country-note { padding: 15px 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--green-pale); font-size: 14px; }
+.vendor-landing-aside { background: var(--green-dark); color: #fff; display: flex; flex-direction: column; justify-content: end; min-height: 480px; }
+.vendor-landing-aside .eyebrow, .vendor-landing-aside p { color: #dce8df; }
+.vendor-landing-aside h2 { font-size: clamp(32px, 3.3vw, 48px); line-height: 1.12; margin: 18px 0; }
+.vendor-landing-aside p:last-child { line-height: 1.8; }
+.vendor-landing .vendor-legal { font-size: 13px; margin-top: 30px; }
+.vendor-payout-card { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-radius: var(--radius-md); padding: 30px; margin-bottom: 24px; background: var(--green-pale); border: 1px solid var(--border); }
+.vendor-payout-card h2 { font-size: 26px; margin: 8px 0; }
+.vendor-payout-card p:not(.eyebrow) { color: var(--ink-soft); line-height: 1.6; max-width: 630px; margin: 8px 0; }
+.vendor-payout-card .vendor-fee-note { font-size: 13px; }
+.vendor-payout-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; flex-shrink: 0; }
+@media(max-width:780px) { .vendor-landing { grid-template-columns: 1fr; margin: 25px auto 55px; } .vendor-landing-aside { min-height: 260px; } .vendor-payout-card { flex-direction: column; align-items: stretch; } }

@@ -24,14 +24,14 @@ export function RentalActions({ item }: { item: Equipment }) {
     return () => { active = false; };
   }, [item._id]);
   useEffect(() => {
-    if (!dates.startDate || !dates.endDate || dates.endDate < dates.startDate || dates.quantity < 1) { setQuote(null); return; }
+    if (!dates.startDate || !dates.endDate || dates.endDate < dates.startDate || dates.quantity < 1) return;
     const controller = new AbortController();
     const timer = window.setTimeout(async () => {
       setCheckingAvailability(true);
       try {
         const result = await authenticatedFetch('/api/customer/availability', { method: 'POST', body: JSON.stringify({ equipmentId: item._id, ...dates }), signal: controller.signal });
         if (!controller.signal.aborted) setQuote(result);
-      } catch (error) {
+      } catch {
         if (!controller.signal.aborted) setQuote(null);
       } finally { if (!controller.signal.aborted) setCheckingAvailability(false); }
     }, 250);

@@ -11,6 +11,7 @@ export function AccountNav() {
   if (!data) return <div className="account"><Link href="/login">Log in</Link><Link className="button dark" href="/register">Get started</Link></div>;
 
   const user = data.user;
+  const role = (user as typeof user & { role?: string }).role;
   const initial = user.name.trim().charAt(0).toUpperCase() || 'G';
   async function signOut() {
     const result = await authClient.signOut();
@@ -28,9 +29,9 @@ export function AccountNav() {
     <div className="account-menu-panel">
       <div className="account-menu-identity"><strong>{user.name}</strong><span>{user.email}</span></div>
       <Link href="/dashboard">Dashboard</Link>
-      <Link href="/dashboard/customer/profile">My profile</Link>
-      <Link href="/dashboard/customer/rentals">My rentals</Link>
-      <Link href="/dashboard/customer/favorites">Saved equipment</Link>
+      <Link href={role === 'owner' ? '/dashboard/owner/profile' : role === 'admin' ? '/dashboard/admin/profile' : '/dashboard/customer/profile'}>My profile</Link>
+      {role === 'customer' && <><Link href="/dashboard/customer/rentals">My rentals</Link><Link href="/dashboard/customer/favorites">Saved equipment</Link><Link href="/become-vendor">Become a vendor</Link></>}
+      {role === 'owner' && <><Link href="/dashboard/owner/equipment">My equipment</Link><Link href="/dashboard/owner/rentals">My equipment rentals</Link></>}
       <button type="button" onClick={signOut}>Log out</button>
     </div>
   </details>;
