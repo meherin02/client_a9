@@ -24,7 +24,6 @@ The application uses Next.js App Router, React, TypeScript, Tailwind CSS, DaisyU
 - Better Auth email/password and Google sign-in, persistent sessions and role-based JWT API access.
 - Stripe Checkout with server pricing, transactional inventory reservations and signed webhook fulfillment.
 - Customer rental history, owner equipment management, admin moderation, user management and role-scoped analytics.
-- Self-serve vendor upgrade at `/become-vendor`, payout onboarding in the owner dashboard, and a Stripe Express payout dashboard link. Vendor listings require completed payout setup before paid checkout.
 - Editable profiles, loading UI, retryable route errors and not-found pages.
 
 ## Billing policy
@@ -33,7 +32,7 @@ Start and end dates are both billable. Daily rentals count calendar days; weekly
 
 ## Verification and limitations
 
-Production build and configured lint/type checks are required before submission. End-to-end authentication, MongoDB concurrency, imgbb uploads, Stripe payments, connected-account transfers, responsive browser checks and deployed route refreshes still need verification with configured services. Vendor payouts require an eligible Stripe Connect platform and vendor country; see the server README before deployment. Verified Google email addresses remain read-only; unverified email addresses use Better Auth's change-email flow. Reviews are labeled illustrative and must be replaced with authorized genuine reviews if presented as real testimonials.
+Production build and configured lint/type checks are required before submission. End-to-end authentication, MongoDB concurrency, imgbb uploads, Stripe payments, responsive browser checks and deployed route refreshes still need verification with configured services. Verified Google email addresses remain read-only; unverified email addresses use Better Auth's change-email flow. Reviews are labeled illustrative and must be replaced with authorized genuine reviews if presented as real testimonials.
 
 Client and server repository links are provided below. The brief requires at least 20 meaningful client commits and 12 server commits. Do not fabricate or split unrelated changes simply to inflate history.
 

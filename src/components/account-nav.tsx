@@ -30,7 +30,7 @@ export function AccountNav() {
       <div className="account-menu-identity"><strong>{user.name}</strong><span>{user.email}</span></div>
       <Link href="/dashboard">Dashboard</Link>
       <Link href={role === 'owner' ? '/dashboard/owner/profile' : role === 'admin' ? '/dashboard/admin/profile' : '/dashboard/customer/profile'}>My profile</Link>
-      {role === 'customer' && <><Link href="/dashboard/customer/rentals">My rentals</Link><Link href="/dashboard/customer/favorites">Saved equipment</Link><Link href="/become-vendor">Become a vendor</Link></>}
+      {role === 'customer' && <><Link href="/dashboard/customer/rentals">My rentals</Link><Link href="/dashboard/customer/favorites">Saved equipment</Link></>}
       {role === 'owner' && <><Link href="/dashboard/owner/equipment">My equipment</Link><Link href="/dashboard/owner/rentals">My equipment rentals</Link></>}
       <button type="button" onClick={signOut}>Log out</button>
     </div>
