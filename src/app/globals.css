@@ -462,20 +462,32 @@ main { max-width: 1440px; margin: auto; width: 100%; }
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    FOOTER
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-footer {
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 32px 5%;
-  gap: 20px;
-  background: var(--surface);
-}
-footer p { font-size: 12px; color: var(--muted-light); }
-.footer-links { display: flex; flex-wrap: wrap; gap: 20px; font-size: 13px; }
-.footer-links a { color: var(--muted); transition: color var(--transition-fast); font-weight: 500; }
-.footer-links a:hover { color: var(--ink); }
-.site-footer { margin-top: auto; }
+.site-footer { margin-top: auto; padding: 68px 5% 26px; color: #eaf1e7; background: radial-gradient(circle at 83% 8%, #25473b 0, transparent 34%), #102b25; overflow: hidden; }
+.footer-inner { width: min(1320px, 100%); margin: 0 auto; }
+.footer-feature { display: flex; align-items: end; justify-content: space-between; gap: 32px; padding: 0 0 64px; border-bottom: 1px solid rgba(234,241,231,.17); }
+.footer-kicker { color: #c8e44a; letter-spacing: .21em; font-size: 10px; font-weight: 800; }
+.footer-feature h2 { color: #f7fbf4; font-size: clamp(38px, 5.2vw, 70px); letter-spacing: -.055em; line-height: 1.04; margin: 18px 0; }
+.footer-feature h2 em { color: #c8e44a; font-style: normal; }
+.footer-feature p { color: #b9cbc0; max-width: 450px; font-size: 15px; line-height: 1.7; }
+.footer-cta { display: inline-flex; align-items: center; justify-content: space-between; gap: 32px; min-width: 215px; padding: 17px 20px; border-radius: 9px; background: #c8e44a; color: #102b25; font-size: 14px; font-weight: 800; transition: transform var(--transition), background var(--transition); }
+.footer-cta:hover { transform: translateY(-3px); background: #e1f183; }
+.footer-cta:focus-visible, .footer-link-group a:focus-visible, .footer-about .brand:focus-visible { outline: 3px solid #c8e44a; outline-offset: 4px; }
+.footer-cta span { font-size: 20px; font-weight: 400; }
+.footer-main { display: grid; grid-template-columns: minmax(260px, 1.6fr) repeat(2, minmax(145px, .7fr)); gap: 48px; padding: 56px 0 64px; }
+.footer-about .brand { display: inline-block; color: #f7fbf4; font-size: 34px; line-height: 1; }
+.footer-about .brand small { display: block; color: #c8e44a; font-size: 9px; letter-spacing: .22em; margin-top: 11px; }
+.footer-about p { color: #a9c0b2; font-size: 14px; line-height: 1.8; max-width: 310px; margin-top: 24px; }
+.footer-link-group { display: flex; flex-direction: column; align-items: start; gap: 14px; }
+.footer-link-group h3 { margin: 0 0 7px; color: #f7fbf4; font-size: 13px; letter-spacing: .04em; }
+.footer-link-group a { color: #b9cbc0; font-size: 13px; transition: color var(--transition-fast), transform var(--transition-fast); }
+.footer-link-group a:hover { color: #dff078; transform: translateX(3px); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding-top: 22px; border-top: 1px solid rgba(234,241,231,.17); }
+.footer-bottom p, .footer-bottom span { color: #99b2a3; font-size: 12px; }
+.footer-bottom > div { display: flex; align-items: center; gap: 24px; }
+.site-footer .theme-toggle { color: #eaf1e7; border-color: rgba(234,241,231,.27); background: rgba(234,241,231,.08); }
+.site-footer .theme-toggle:hover { background: rgba(234,241,231,.17); }
+@media (max-width: 760px) { .site-footer { padding-top: 52px; } .footer-feature { align-items: start; flex-direction: column; padding-bottom: 48px; } .footer-main { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 42px 24px; } .footer-about { grid-column: 1 / -1; } .footer-bottom, .footer-bottom > div { align-items: start; flex-direction: column; gap: 14px; } }
+@media (max-width: 420px) { .footer-link-group a { font-size: 12px; } .footer-cta { width: 100%; } }
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    BADGES & CHIPS
@@ -1203,8 +1215,6 @@ td small { display: block; font-size: 12px; color: var(--muted); margin-top: 5px
   .site-header { gap: 14px; }
   .mobile-navigation { width: 100%; }
   .mobile-navigation > div { left: 5%; right: 5%; top: 118px; }
-  .site-footer { align-items: start; }
-  .footer-links { gap: 14px; }
   .benefits article p { margin-top: 10px; }
 }
 
@@ -1236,7 +1246,6 @@ td small { display: block; font-size: 12px; color: var(--muted); margin-top: 5px
   .categories a { min-height: 136px; padding: 16px; }
   .benefits { padding: 32px; grid-template-columns: 1fr; gap: 20px; }
   .steps { grid-template-columns: 1fr; gap: 24px; }
-  footer { flex-direction: column; align-items: start; }
   .search div { flex-direction: row; }
   .search button { font-size: 12.5px; padding: 10px 14px; }
 }
