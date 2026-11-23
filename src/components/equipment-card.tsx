@@ -3,27 +3,30 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { authenticatedFetch, authClient } from '@/lib/auth-client';
 import { type Equipment, money } from '@/lib/equipment';
 
 function EquipmentFavorite({ id }: { id: string }) {
   const { data, isPending } = authClient.useSession();
+  const router = useRouter();
+  const role = data?.user && (data.user as typeof data.user & { role?: string }).role;
   const [saved, setSaved] = useState(false);
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    if (!data) return;
+    if (!data || role !== 'customer') return;
     let active = true;
     authenticatedFetch('/api/customer/favorites').then((favorites: { equipmentId: string }[]) => {
       if (active) setSaved(favorites.some(favorite => favorite.equipmentId === id));
     }).catch(() => {}).finally(() => { if (active) setBusy(false); });
     return () => { active = false; };
-  }, [data, id]);
+  }, [data, id, role]);
 
   async function toggleFavorite() {
     if (!data) {
-      toast('Sign in with a Customer account to save equipment.');
+      router.push(`/login?next=${encodeURIComponent(`/equipment/${id}`)}`);
       return;
     }
     setBusy(true);
@@ -36,7 +39,8 @@ function EquipmentFavorite({ id }: { id: string }) {
     } finally { setBusy(false); }
   }
 
-  return <button type="button" className={`equipment-favorite${saved ? ' is-saved' : ''}`} disabled={isPending || busy} aria-label={saved ? 'Remove from saved equipment' : 'Save equipment'} aria-pressed={saved} onClick={toggleFavorite}>
+  if (role && role !== 'customer') return null;
+  return <button type="button" className={`equipment-favorite${saved ? ' is-saved' : ''}`} disabled={isPending || busy} aria-label={saved ? 'Remove from saved equipment' : data ? 'Save equipment' : 'Sign in to save equipment'} aria-pressed={saved} onClick={toggleFavorite}>
     <svg viewBox="0 0 24 24" fill={saved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>
   </button>;
 }

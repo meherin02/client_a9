@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { SiteHeader } from '@/components/site-header';
 import { EquipmentCard } from '@/components/equipment-card';
 import { API_URL } from '@/lib/auth-client';
@@ -10,6 +10,8 @@ const filterLabels: Record<string, string> = { q: 'Search', category: 'Category'
 const categoryName = (value: string) => value === 'Fashion' ? 'Fashion' : value;
 
 export default function Catalog() {
+  const filterPanel = useRef<HTMLDetailsElement>(null);
+  const resultsSection = useRef<HTMLElement>(null);
   const [result, setResult] = useState<{ items: Equipment[]; total: number; page: number; limit: number } | null>(null);
   const [query, setQuery] = useState<string | null>(null);
   const [error, setError] = useState('');
@@ -18,6 +20,7 @@ export default function Catalog() {
 
   useEffect(() => {
     const sync = () => { setLoading(true); setError(''); setQuery(window.location.search); };
+    if (window.matchMedia('(max-width: 760px)').matches && filterPanel.current) filterPanel.current.open = false;
     sync(); window.addEventListener('popstate', sync);
     return () => window.removeEventListener('popstate', sync);
   }, []);
@@ -33,19 +36,22 @@ export default function Catalog() {
     return () => controller.abort();
   }, [query, attempt]);
 
-  function navigate(params: URLSearchParams) {
+  function navigate(params: URLSearchParams, scrollResults = false) {
     const next = params.size ? `?${params}` : '';
     window.history.pushState({}, '', `/equipment${next}`);
     setLoading(true); setError('');
     if (next === query) setAttempt(value => value + 1);
     setQuery(next);
+    if (scrollResults) requestAnimationFrame(() => resultsSection.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   }
 
   function filter(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const params = new URLSearchParams();
     for (const [key, value] of new FormData(event.currentTarget)) if (String(value).trim()) params.set(key, String(value).trim());
-    params.set('page', '1'); navigate(params);
+    params.set('page', '1');
+    if (window.matchMedia('(max-width: 760px)').matches && filterPanel.current) filterPanel.current.open = false;
+    navigate(params, true);
   }
 
   const values = new URLSearchParams(query || '');
@@ -56,7 +62,7 @@ export default function Catalog() {
   return <><SiteHeader/><main className="catalog">
     <section className="catalog-intro"><p className="eyebrow">THE RIGHT TOOLS. AROUND THE CORNER.</p><h1>Find your next possibility.</h1><p className="muted">Equipment for the things you want to make, build, and do.</p></section>
     <div className="catalog-layout">
-      <details className="filter-panel" open>
+      <details className="filter-panel" ref={filterPanel} open>
         <summary><span>Find your fit</span><span className="filter-toggle-label">Filters & sort</span><span className="filter-count">{activeFilters.length ? `${activeFilters.length} active` : 'Browse gear'}</span></summary>
         <form key={query ?? 'initial'} onSubmit={filter}>
           <label>Search equipment<input name="q" defaultValue={values.get('q') || ''} placeholder="Name, location, or category"/></label>
@@ -69,10 +75,10 @@ export default function Catalog() {
           <button className="text-button" type="button" onClick={() => navigate(new URLSearchParams())}>Clear filters</button>
         </form>
       </details>
-      <section className="catalog-results" aria-live="polite">
+      <section className="catalog-results" ref={resultsSection} aria-live="polite">
         <div className="results-heading"><strong>{loading ? 'Finding equipment…' : `${result?.total || 0} equipment items`}</strong><span>Made for your next project</span></div>
         {(activeFilters.length > 0 || sortLabel) && <div className="active-filters" aria-label="Active filters"><span className="active-filters-label">Showing</span>{activeFilters.map(([key,value]) => <button key={key} type="button" className="filter-chip" onClick={() => { const next = new URLSearchParams(values); next.delete(key); next.set('page','1'); navigate(next); }} aria-label={`Remove ${filterLabels[key] || key} filter`}><span>{filterLabels[key] || key}: <strong>{key === 'category' ? categoryName(value) : key === 'availability' ? 'Available now' : key === 'rentalType' ? value[0].toUpperCase()+value.slice(1) : key === 'minPrice' || key === 'maxPrice' ? `৳${value}` : value}</strong></span><span aria-hidden="true">×</span></button>)}{sortLabel && <span className="filter-chip filter-chip-static">Sort: <strong>{sortLabel}</strong></span>}<button className="clear-active-filters" type="button" onClick={() => navigate(new URLSearchParams())}>Clear all</button></div>}
-        {error ? <div className="empty-state"><h2>Equipment is taking a moment.</h2><p>{error}</p><button className="button dark" onClick={() => { setError(''); setLoading(true); setAttempt(attempt + 1); }}>Try again</button></div> : loading ? <div className="equipment-grid">{Array.from({ length: 6 }, (_, index) => <div className="equipment-skeleton" key={index}/>)}</div> : !result?.items.length ? <div className="empty-state"><h2>No equipment found.</h2><p>Try another location, a wider price range, or fewer filters.</p><button className="button" onClick={() => navigate(new URLSearchParams())}>Clear filters</button></div> : <><div className="equipment-grid">{result.items.map(item => <EquipmentCard item={item} key={item._id}/>)}</div><div className="pagination"><button className="button" disabled={result.page <= 1} onClick={() => { const next = new URLSearchParams(values); next.set('page', String(result.page - 1)); navigate(next); }}>Previous</button><span>Page {result.page} of {totalPages}</span><button className="button" disabled={result.page >= totalPages} onClick={() => { const next = new URLSearchParams(values); next.set('page', String(result.page + 1)); navigate(next); }}>Next</button></div></>}
+        {error ? <div className="empty-state"><h2>Equipment is taking a moment.</h2><p>{error}</p><button className="button dark" onClick={() => { setError(''); setLoading(true); setAttempt(attempt + 1); }}>Try again</button></div> : loading ? <div className="equipment-grid">{Array.from({ length: 6 }, (_, index) => <div className="equipment-skeleton" key={index}/>)}</div> : !result?.items.length ? <div className="empty-state"><h2>No equipment found.</h2><p>Try another location, a wider price range, or fewer filters.</p><button className="button" onClick={() => navigate(new URLSearchParams())}>Clear filters</button></div> : <><div className="equipment-grid">{result.items.map(item => <EquipmentCard item={item} key={item._id}/>)}</div><div className="pagination"><button className="button" disabled={result.page <= 1} onClick={() => { const next = new URLSearchParams(values); next.set('page', String(result.page - 1)); navigate(next, true); }}>Previous</button><span>Page {result.page} of {totalPages}</span><button className="button" disabled={result.page >= totalPages} onClick={() => { const next = new URLSearchParams(values); next.set('page', String(result.page + 1)); navigate(next, true); }}>Next</button></div></>}
       </section>
     </div>
   </main></>;

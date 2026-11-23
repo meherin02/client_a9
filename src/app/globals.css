@@ -270,6 +270,7 @@ nav a:hover { background: var(--green-pale); color: var(--ink); }
 .account-menu-panel button { border-top: 1px solid var(--border-soft); border-radius: 0 0 7px 7px; margin-top: 3px; color: var(--muted); }
 .mobile-navigation > div > nav { display: grid; align-items: stretch; }
 .mobile-navigation > div > nav a { display: block; }
+.mobile-account { display: none; }
 .mobile-navigation > div .account { display: grid; justify-content: stretch; margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--border-soft); }
 .mobile-navigation > div .account-menu-panel { position: static; width: 100%; margin-top: 8px; box-shadow: none; }
 .mobile-navigation > div .account-menu > summary { justify-content: flex-start; }
@@ -804,6 +805,7 @@ button.filter-chip { cursor: pointer; }
 
 /* â”€â”€â”€ Pagination â”€â”€â”€ */
 .pagination { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 40px 0; font-size: 13px; }
+.catalog-results { scroll-margin-top: 100px; }
 .pagination a, .pagination button {
   padding: 8px 14px;
   border-radius: 7px;
@@ -1168,15 +1170,18 @@ td small { display: block; font-size: 12px; color: var(--muted); margin-top: 5px
   top: 0;
   z-index: 100;
   flex-shrink: 0;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .mobile-navigation { display: none; }
-.mobile-navigation summary { cursor: pointer; font-size: 13.5px; font-weight: 600; list-style: none; padding: 8px 14px; border-radius: 7px; border: 1.5px solid var(--border); background: var(--surface-card); }
+.mobile-navigation summary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; cursor: pointer; color: var(--ink); font-size: 13.5px; font-weight: 600; list-style: none; padding: 8px 14px; border-radius: 7px; border: 1.5px solid var(--border); background: var(--surface-card); }
+.mobile-navigation summary svg { width: 19px; height: 19px; }
+.mobile-navigation[open] > summary { background: var(--green-pale); }
+.mobile-navigation summary:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
 .mobile-navigation summary::-webkit-details-marker { display: none; }
 .mobile-navigation > div {
   position: absolute;
   right: 5%;
-  top: 76px;
+  top: calc(100% + 8px);
   padding: 18px;
   background: var(--surface-card);
   box-shadow: var(--shadow-xl);
@@ -1212,9 +1217,14 @@ td small { display: block; font-size: 12px; color: var(--muted); margin-top: 5px
   .home-equipment, .reviews-section { padding: 48px 6%; }
   .owner-invite { padding: 32px; flex-direction: column; align-items: start; }
   .review-grid { grid-template-columns: 1fr; }
-  .site-header { gap: 14px; }
-  .mobile-navigation { width: 100%; }
-  .mobile-navigation > div { left: 5%; right: 5%; top: 118px; }
+  .site-header { gap: 8px; }
+  .site-header .brand { font-size: 21px; }
+  .site-header .brand small { display: none; }
+  .site-header .header-actions .account, .site-header .header-actions .account-loading { display: none; }
+  .mobile-navigation > summary { width: 44px; padding: 8px; }
+  .mobile-navigation > summary span { display: none; }
+  .mobile-navigation > div { left: 5%; right: 5%; }
+  .mobile-account { display: block; }
   .benefits article p { margin-top: 10px; }
 }
 
@@ -1222,7 +1232,7 @@ td small { display: block; font-size: 12px; color: var(--muted); margin-top: 5px
    RESPONSIVE â€” HEADER & HERO
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 @media(max-width:1000px) {
-  nav { display: none; }
+  .site-header > nav { display: none; }
   .rental-hero-copy { padding: 48px 7%; }
   .rental-hero-photo { min-height: 500px; }
   .categories { grid-template-columns: repeat(3, minmax(0,1fr)); }
